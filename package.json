@@ -1,0 +1,24 @@
+{
+  "name": "detran_crawler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m4rquee/detran_crawler.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/m4rquee/detran_crawler/issues"
+  },
+  "homepage": "https://github.com/m4rquee/detran_crawler#readme",
+  "dependencies": {
+    "lodash": "^4.17.10",
+    "randomstring": "^1.1.5",
+    "request-promise": "^4.2.2"
+  }
+}
