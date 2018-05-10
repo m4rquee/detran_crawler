@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/m4rquee/detran_crawler#readme",
   "dependencies": {
+    "js-combinatorics": "^0.5.3",
     "lodash": "^4.17.10",
     "randomstring": "^1.1.5",
+    "request": "^2.85.0",
     "request-promise": "^4.2.2"
   }
 }
