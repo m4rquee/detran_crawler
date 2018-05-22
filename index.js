@@ -1,7 +1,5 @@
-const _ = require('lodash');
 const rp = require('request-promise');
-const { generate } = require("randomstring");
-const { gen_plates } = require('./gen_plates');
+const { genAllPlates, genPlatesRange } = require('./gen_plates');
 
 const waitTime = 25;
 const batchSize = 50;
@@ -24,7 +22,9 @@ var options = {
     }
 };
 
-async function getNCars(n, plates) {
+async function getNCars(plates, n) {
+    n = n || plates.length;
+
     let cars = [[], []];
 
     while (cars[0].length < n) {
@@ -48,23 +48,21 @@ async function getNCars(n, plates) {
                 if (!resp[i].includes('Licenciamento: <b>    </b>')
                     && !resp[i].includes('<h3>Placa Não Cadastrada')) {
 
-                    console.error(`${batch[0][i]}`);
                     cars[0].push(batch[0][i]);
                     cars[1].push(resp[i].split('Licenciamento:')[1]);
+
+                    console.error(`${batch[0][i][0]}-${batch[0][i][1]} was found`)
                 }
             }
         }).catch(err => console.log(err));
-        
+
         await sleep(waitTime * 10);
-        
-        // console.log(`Currently at ${batch[0][0][0]}-${batch[0][0][1]}`)
-        // console.log('Batch done');
     }
 
     return cars;
 }
 
-let plates = gen_plates();
-getNCars(10000, plates).then((a) => {
-    a[0].forEach((v, i, l) => console.log(v));
+let plates = genPlatesRange('MMN', 'MOW');
+getNCars(plates, 1).then(a => {
+    a[0].forEach((v, i, l) => console.log(v[0] + '-' + v[1]));
 }).catch(console.error);
